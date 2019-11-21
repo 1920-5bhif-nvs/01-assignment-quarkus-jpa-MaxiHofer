@@ -1,0 +1,35 @@
+= Dokumentation
+
+== Erstellen eines Projekts
+
+[source,perl]
+mvn io.quarkus:quarkus-maven-plugin:1.0.0.CR1:create
+    -DprojectGroupId=at.htl
+    -DprojectArtifactId=motorcycleseller
+    -DclassName="org.acme.quickstart.GreetingResource"
+    -Dpath="/hello"
+
+== Konfigurieren der DB
+
+in application.properties eintragen:
+
+[source,perl]
+quarkus.datasource.url=jdbc:postgresql://192.168.99.100/postgres
+quarkus.datasource.driver=org.postgresql.Driver
+quarkus.datasource.username=postgres
+quarkus.datasource.password=passme
+quarkus.datasource.min-size=3
+quarkus.datasource.max-size=13
+quarkus.hibernate-orm.database.generation=drop-and-create
+
+
+== Starten einer PostgreSQL DB
+
+[source,perl]
+sudo docker run --name motorcycleseller-postgres -p 5432:5432 -e POSTGRES_PASSWORD=passme -d postgres
+
+== Quarkus im DevMode starten
+
+[source,perl]
+ ./mvnw compile quarkus:dev:
+
